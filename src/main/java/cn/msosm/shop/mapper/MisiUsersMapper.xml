@@ -1,0 +1,1256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.msosm.shop.mapper.MisiUsersMapper" >
+  <resultMap id="BaseResultMap" type="cn.msosm.shop.pojo.MisiUsers" >
+    <id column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="old_userid" property="oldUserid" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="paypwd" property="paypwd" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="BIT" />
+    <result column="birthday" property="birthday" jdbcType="CHAR" />
+    <result column="user_money" property="userMoney" jdbcType="DECIMAL" />
+    <result column="frozen_money" property="frozenMoney" jdbcType="DECIMAL" />
+    <result column="frozen_withdrawals" property="frozenWithdrawals" jdbcType="DECIMAL" />
+    <result column="underling_number" property="underlingNumber" jdbcType="INTEGER" />
+    <result column="white_points" property="whitePoints" jdbcType="INTEGER" />
+    <result column="red_points" property="redPoints" jdbcType="INTEGER" />
+    <result column="address_id" property="addressId" jdbcType="INTEGER" />
+    <result column="old_phone" property="oldPhone" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="mobile_validated" property="mobileValidated" jdbcType="TINYINT" />
+    <result column="oauth_type" property="oauthType" jdbcType="VARCHAR" />
+    <result column="wxp_openid" property="wxpOpenid" jdbcType="VARCHAR" />
+    <result column="app_openid" property="appOpenid" jdbcType="VARCHAR" />
+    <result column="pc_openid" property="pcOpenid" jdbcType="VARCHAR" />
+    <result column="token" property="token" jdbcType="VARCHAR" />
+    <result column="unionid" property="unionid" jdbcType="VARCHAR" />
+    <result column="weixin" property="weixin" jdbcType="VARCHAR" />
+    <result column="head_pic" property="headPic" jdbcType="VARCHAR" />
+    <result column="email_validated" property="emailValidated" jdbcType="BIT" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="TINYINT" />
+    <result column="total_amount" property="totalAmount" jdbcType="DECIMAL" />
+    <result column="blackname" property="blackname" jdbcType="BIT" />
+    <result column="first_leader" property="firstLeader" jdbcType="CHAR" />
+    <result column="second_leader" property="secondLeader" jdbcType="CHAR" />
+    <result column="third_leader" property="thirdLeader" jdbcType="CHAR" />
+    <result column="reg_time" property="regTime" jdbcType="INTEGER" />
+    <result column="last_ip" property="lastIp" jdbcType="VARCHAR" />
+    <result column="last_login" property="lastLogin" jdbcType="INTEGER" />
+    <result column="time_out" property="timeOut" jdbcType="INTEGER" />
+    <result column="join_places" property="joinPlaces" jdbcType="INTEGER" />
+    <result column="history_count_places" property="historyCountPlaces" jdbcType="INTEGER" />
+    <result column="history_left_places" property="historyLeftPlaces" jdbcType="INTEGER" />
+    <result column="reward_count_places" property="rewardCountPlaces" jdbcType="INTEGER" />
+    <result column="reward_left_places" property="rewardLeftPlaces" jdbcType="INTEGER" />
+    <result column="strtopass" property="strtopass" jdbcType="CHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="detailed" property="detailed" jdbcType="VARCHAR" />
+    <result column="tag" property="tag" jdbcType="INTEGER" />
+    <result column="rec_bussines" property="recBussines" jdbcType="CHAR" />
+    <result column="rec_userid" property="recUserid" jdbcType="VARCHAR" />
+    <result column="rec_vip" property="recVip" jdbcType="VARCHAR" />
+    <result column="places" property="places" jdbcType="INTEGER" />
+    <result column="holder" property="holder" jdbcType="VARCHAR" />
+    <result column="bank_numbre" property="bankNumbre" jdbcType="VARCHAR" />
+    <result column="bank_card" property="bankCard" jdbcType="VARCHAR" />
+    <result column="bank_card_address" property="bankCardAddress" jdbcType="VARCHAR" />
+    <result column="is_free" property="isFree" jdbcType="BIT" />
+    <result column="oauth" property="oauth" jdbcType="VARCHAR" />
+    <result column="wx_token" property="wxToken" jdbcType="VARCHAR" />
+    <result column="access_token" property="accessToken" jdbcType="VARCHAR" />
+    <result column="wx_ewm" property="wxEwm" jdbcType="VARCHAR" />
+    <result column="wx_ewm_time" property="wxEwmTime" jdbcType="INTEGER" />
+    <result column="hoder" property="hoder" jdbcType="VARCHAR" />
+    <result column="bankimg" property="bankimg" jdbcType="VARCHAR" />
+    <result column="subbranches" property="subbranches" jdbcType="VARCHAR" />
+    <result column="bank_name" property="bankName" jdbcType="VARCHAR" />
+    <result column="bank_number" property="bankNumber" jdbcType="VARCHAR" />
+    <result column="card" property="card" jdbcType="CHAR" />
+    <result column="is_headquarters" property="isHeadquarters" jdbcType="BIT" />
+    <result column="is_recuid" property="isRecuid" jdbcType="BIT" />
+    <result column="rec_noble" property="recNoble" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    user_id, old_userid, email, password, paypwd, sex, birthday, user_money, frozen_money, 
+    frozen_withdrawals, underling_number, white_points, red_points, address_id, old_phone, 
+    phone, mobile_validated, oauth_type, wxp_openid, app_openid, pc_openid, token, unionid, 
+    weixin, head_pic, email_validated, username, nickname, level, total_amount, blackname, 
+    first_leader, second_leader, third_leader, reg_time, last_ip, last_login, time_out, 
+    join_places, history_count_places, history_left_places, reward_count_places, reward_left_places, 
+    strtopass, province, city, detailed, tag, rec_bussines, rec_userid, rec_vip, places, 
+    holder, bank_numbre, bank_card, bank_card_address, is_free, oauth, wx_token, access_token, 
+    wx_ewm, wx_ewm_time, hoder, bankimg, subbranches, bank_name, bank_number, card, is_headquarters, 
+    is_recuid, rec_noble
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.msosm.shop.pojo.MisiUsersExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from misi_users
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from misi_users
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from misi_users
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.msosm.shop.pojo.MisiUsersExample" >
+    delete from misi_users
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.msosm.shop.pojo.MisiUsers" >
+    insert into misi_users (user_id, old_userid, email, 
+      password, paypwd, sex, 
+      birthday, user_money, frozen_money, 
+      frozen_withdrawals, underling_number, white_points, 
+      red_points, address_id, old_phone, 
+      phone, mobile_validated, oauth_type, 
+      wxp_openid, app_openid, pc_openid, 
+      token, unionid, weixin, 
+      head_pic, email_validated, username, 
+      nickname, level, total_amount, 
+      blackname, first_leader, second_leader, 
+      third_leader, reg_time, last_ip, 
+      last_login, time_out, join_places, 
+      history_count_places, history_left_places, 
+      reward_count_places, reward_left_places, strtopass, 
+      province, city, detailed, 
+      tag, rec_bussines, rec_userid, 
+      rec_vip, places, holder, 
+      bank_numbre, bank_card, bank_card_address, 
+      is_free, oauth, wx_token, 
+      access_token, wx_ewm, wx_ewm_time, 
+      hoder, bankimg, subbranches, 
+      bank_name, bank_number, card, 
+      is_headquarters, is_recuid, rec_noble
+      )
+    values (#{userId,jdbcType=VARCHAR}, #{oldUserid,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{paypwd,jdbcType=VARCHAR}, #{sex,jdbcType=BIT}, 
+      #{birthday,jdbcType=CHAR}, #{userMoney,jdbcType=DECIMAL}, #{frozenMoney,jdbcType=DECIMAL}, 
+      #{frozenWithdrawals,jdbcType=DECIMAL}, #{underlingNumber,jdbcType=INTEGER}, #{whitePoints,jdbcType=INTEGER}, 
+      #{redPoints,jdbcType=INTEGER}, #{addressId,jdbcType=INTEGER}, #{oldPhone,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{mobileValidated,jdbcType=TINYINT}, #{oauthType,jdbcType=VARCHAR}, 
+      #{wxpOpenid,jdbcType=VARCHAR}, #{appOpenid,jdbcType=VARCHAR}, #{pcOpenid,jdbcType=VARCHAR}, 
+      #{token,jdbcType=VARCHAR}, #{unionid,jdbcType=VARCHAR}, #{weixin,jdbcType=VARCHAR}, 
+      #{headPic,jdbcType=VARCHAR}, #{emailValidated,jdbcType=BIT}, #{username,jdbcType=VARCHAR}, 
+      #{nickname,jdbcType=VARCHAR}, #{level,jdbcType=TINYINT}, #{totalAmount,jdbcType=DECIMAL}, 
+      #{blackname,jdbcType=BIT}, #{firstLeader,jdbcType=CHAR}, #{secondLeader,jdbcType=CHAR}, 
+      #{thirdLeader,jdbcType=CHAR}, #{regTime,jdbcType=INTEGER}, #{lastIp,jdbcType=VARCHAR}, 
+      #{lastLogin,jdbcType=INTEGER}, #{timeOut,jdbcType=INTEGER}, #{joinPlaces,jdbcType=INTEGER}, 
+      #{historyCountPlaces,jdbcType=INTEGER}, #{historyLeftPlaces,jdbcType=INTEGER}, 
+      #{rewardCountPlaces,jdbcType=INTEGER}, #{rewardLeftPlaces,jdbcType=INTEGER}, #{strtopass,jdbcType=CHAR}, 
+      #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{detailed,jdbcType=VARCHAR}, 
+      #{tag,jdbcType=INTEGER}, #{recBussines,jdbcType=CHAR}, #{recUserid,jdbcType=VARCHAR}, 
+      #{recVip,jdbcType=VARCHAR}, #{places,jdbcType=INTEGER}, #{holder,jdbcType=VARCHAR}, 
+      #{bankNumbre,jdbcType=VARCHAR}, #{bankCard,jdbcType=VARCHAR}, #{bankCardAddress,jdbcType=VARCHAR}, 
+      #{isFree,jdbcType=BIT}, #{oauth,jdbcType=VARCHAR}, #{wxToken,jdbcType=VARCHAR}, 
+      #{accessToken,jdbcType=VARCHAR}, #{wxEwm,jdbcType=VARCHAR}, #{wxEwmTime,jdbcType=INTEGER}, 
+      #{hoder,jdbcType=VARCHAR}, #{bankimg,jdbcType=VARCHAR}, #{subbranches,jdbcType=VARCHAR}, 
+      #{bankName,jdbcType=VARCHAR}, #{bankNumber,jdbcType=VARCHAR}, #{card,jdbcType=CHAR}, 
+      #{isHeadquarters,jdbcType=BIT}, #{isRecuid,jdbcType=BIT}, #{recNoble,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.msosm.shop.pojo.MisiUsers" >
+    insert into misi_users
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="oldUserid != null" >
+        old_userid,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="paypwd != null" >
+        paypwd,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="userMoney != null" >
+        user_money,
+      </if>
+      <if test="frozenMoney != null" >
+        frozen_money,
+      </if>
+      <if test="frozenWithdrawals != null" >
+        frozen_withdrawals,
+      </if>
+      <if test="underlingNumber != null" >
+        underling_number,
+      </if>
+      <if test="whitePoints != null" >
+        white_points,
+      </if>
+      <if test="redPoints != null" >
+        red_points,
+      </if>
+      <if test="addressId != null" >
+        address_id,
+      </if>
+      <if test="oldPhone != null" >
+        old_phone,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="mobileValidated != null" >
+        mobile_validated,
+      </if>
+      <if test="oauthType != null" >
+        oauth_type,
+      </if>
+      <if test="wxpOpenid != null" >
+        wxp_openid,
+      </if>
+      <if test="appOpenid != null" >
+        app_openid,
+      </if>
+      <if test="pcOpenid != null" >
+        pc_openid,
+      </if>
+      <if test="token != null" >
+        token,
+      </if>
+      <if test="unionid != null" >
+        unionid,
+      </if>
+      <if test="weixin != null" >
+        weixin,
+      </if>
+      <if test="headPic != null" >
+        head_pic,
+      </if>
+      <if test="emailValidated != null" >
+        email_validated,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="totalAmount != null" >
+        total_amount,
+      </if>
+      <if test="blackname != null" >
+        blackname,
+      </if>
+      <if test="firstLeader != null" >
+        first_leader,
+      </if>
+      <if test="secondLeader != null" >
+        second_leader,
+      </if>
+      <if test="thirdLeader != null" >
+        third_leader,
+      </if>
+      <if test="regTime != null" >
+        reg_time,
+      </if>
+      <if test="lastIp != null" >
+        last_ip,
+      </if>
+      <if test="lastLogin != null" >
+        last_login,
+      </if>
+      <if test="timeOut != null" >
+        time_out,
+      </if>
+      <if test="joinPlaces != null" >
+        join_places,
+      </if>
+      <if test="historyCountPlaces != null" >
+        history_count_places,
+      </if>
+      <if test="historyLeftPlaces != null" >
+        history_left_places,
+      </if>
+      <if test="rewardCountPlaces != null" >
+        reward_count_places,
+      </if>
+      <if test="rewardLeftPlaces != null" >
+        reward_left_places,
+      </if>
+      <if test="strtopass != null" >
+        strtopass,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="detailed != null" >
+        detailed,
+      </if>
+      <if test="tag != null" >
+        tag,
+      </if>
+      <if test="recBussines != null" >
+        rec_bussines,
+      </if>
+      <if test="recUserid != null" >
+        rec_userid,
+      </if>
+      <if test="recVip != null" >
+        rec_vip,
+      </if>
+      <if test="places != null" >
+        places,
+      </if>
+      <if test="holder != null" >
+        holder,
+      </if>
+      <if test="bankNumbre != null" >
+        bank_numbre,
+      </if>
+      <if test="bankCard != null" >
+        bank_card,
+      </if>
+      <if test="bankCardAddress != null" >
+        bank_card_address,
+      </if>
+      <if test="isFree != null" >
+        is_free,
+      </if>
+      <if test="oauth != null" >
+        oauth,
+      </if>
+      <if test="wxToken != null" >
+        wx_token,
+      </if>
+      <if test="accessToken != null" >
+        access_token,
+      </if>
+      <if test="wxEwm != null" >
+        wx_ewm,
+      </if>
+      <if test="wxEwmTime != null" >
+        wx_ewm_time,
+      </if>
+      <if test="hoder != null" >
+        hoder,
+      </if>
+      <if test="bankimg != null" >
+        bankimg,
+      </if>
+      <if test="subbranches != null" >
+        subbranches,
+      </if>
+      <if test="bankName != null" >
+        bank_name,
+      </if>
+      <if test="bankNumber != null" >
+        bank_number,
+      </if>
+      <if test="card != null" >
+        card,
+      </if>
+      <if test="isHeadquarters != null" >
+        is_headquarters,
+      </if>
+      <if test="isRecuid != null" >
+        is_recuid,
+      </if>
+      <if test="recNoble != null" >
+        rec_noble,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="oldUserid != null" >
+        #{oldUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="paypwd != null" >
+        #{paypwd,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=BIT},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=CHAR},
+      </if>
+      <if test="userMoney != null" >
+        #{userMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="frozenMoney != null" >
+        #{frozenMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="frozenWithdrawals != null" >
+        #{frozenWithdrawals,jdbcType=DECIMAL},
+      </if>
+      <if test="underlingNumber != null" >
+        #{underlingNumber,jdbcType=INTEGER},
+      </if>
+      <if test="whitePoints != null" >
+        #{whitePoints,jdbcType=INTEGER},
+      </if>
+      <if test="redPoints != null" >
+        #{redPoints,jdbcType=INTEGER},
+      </if>
+      <if test="addressId != null" >
+        #{addressId,jdbcType=INTEGER},
+      </if>
+      <if test="oldPhone != null" >
+        #{oldPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileValidated != null" >
+        #{mobileValidated,jdbcType=TINYINT},
+      </if>
+      <if test="oauthType != null" >
+        #{oauthType,jdbcType=VARCHAR},
+      </if>
+      <if test="wxpOpenid != null" >
+        #{wxpOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="appOpenid != null" >
+        #{appOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="pcOpenid != null" >
+        #{pcOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="unionid != null" >
+        #{unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="weixin != null" >
+        #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="headPic != null" >
+        #{headPic,jdbcType=VARCHAR},
+      </if>
+      <if test="emailValidated != null" >
+        #{emailValidated,jdbcType=BIT},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=TINYINT},
+      </if>
+      <if test="totalAmount != null" >
+        #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="blackname != null" >
+        #{blackname,jdbcType=BIT},
+      </if>
+      <if test="firstLeader != null" >
+        #{firstLeader,jdbcType=CHAR},
+      </if>
+      <if test="secondLeader != null" >
+        #{secondLeader,jdbcType=CHAR},
+      </if>
+      <if test="thirdLeader != null" >
+        #{thirdLeader,jdbcType=CHAR},
+      </if>
+      <if test="regTime != null" >
+        #{regTime,jdbcType=INTEGER},
+      </if>
+      <if test="lastIp != null" >
+        #{lastIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLogin != null" >
+        #{lastLogin,jdbcType=INTEGER},
+      </if>
+      <if test="timeOut != null" >
+        #{timeOut,jdbcType=INTEGER},
+      </if>
+      <if test="joinPlaces != null" >
+        #{joinPlaces,jdbcType=INTEGER},
+      </if>
+      <if test="historyCountPlaces != null" >
+        #{historyCountPlaces,jdbcType=INTEGER},
+      </if>
+      <if test="historyLeftPlaces != null" >
+        #{historyLeftPlaces,jdbcType=INTEGER},
+      </if>
+      <if test="rewardCountPlaces != null" >
+        #{rewardCountPlaces,jdbcType=INTEGER},
+      </if>
+      <if test="rewardLeftPlaces != null" >
+        #{rewardLeftPlaces,jdbcType=INTEGER},
+      </if>
+      <if test="strtopass != null" >
+        #{strtopass,jdbcType=CHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="detailed != null" >
+        #{detailed,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null" >
+        #{tag,jdbcType=INTEGER},
+      </if>
+      <if test="recBussines != null" >
+        #{recBussines,jdbcType=CHAR},
+      </if>
+      <if test="recUserid != null" >
+        #{recUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="recVip != null" >
+        #{recVip,jdbcType=VARCHAR},
+      </if>
+      <if test="places != null" >
+        #{places,jdbcType=INTEGER},
+      </if>
+      <if test="holder != null" >
+        #{holder,jdbcType=VARCHAR},
+      </if>
+      <if test="bankNumbre != null" >
+        #{bankNumbre,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCard != null" >
+        #{bankCard,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCardAddress != null" >
+        #{bankCardAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="isFree != null" >
+        #{isFree,jdbcType=BIT},
+      </if>
+      <if test="oauth != null" >
+        #{oauth,jdbcType=VARCHAR},
+      </if>
+      <if test="wxToken != null" >
+        #{wxToken,jdbcType=VARCHAR},
+      </if>
+      <if test="accessToken != null" >
+        #{accessToken,jdbcType=VARCHAR},
+      </if>
+      <if test="wxEwm != null" >
+        #{wxEwm,jdbcType=VARCHAR},
+      </if>
+      <if test="wxEwmTime != null" >
+        #{wxEwmTime,jdbcType=INTEGER},
+      </if>
+      <if test="hoder != null" >
+        #{hoder,jdbcType=VARCHAR},
+      </if>
+      <if test="bankimg != null" >
+        #{bankimg,jdbcType=VARCHAR},
+      </if>
+      <if test="subbranches != null" >
+        #{subbranches,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null" >
+        #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankNumber != null" >
+        #{bankNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="card != null" >
+        #{card,jdbcType=CHAR},
+      </if>
+      <if test="isHeadquarters != null" >
+        #{isHeadquarters,jdbcType=BIT},
+      </if>
+      <if test="isRecuid != null" >
+        #{isRecuid,jdbcType=BIT},
+      </if>
+      <if test="recNoble != null" >
+        #{recNoble,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.msosm.shop.pojo.MisiUsersExample" resultType="java.lang.Integer" >
+    select count(*) from misi_users
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update misi_users
+    <set >
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oldUserid != null" >
+        old_userid = #{record.oldUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paypwd != null" >
+        paypwd = #{record.paypwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=BIT},
+      </if>
+      <if test="record.birthday != null" >
+        birthday = #{record.birthday,jdbcType=CHAR},
+      </if>
+      <if test="record.userMoney != null" >
+        user_money = #{record.userMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.frozenMoney != null" >
+        frozen_money = #{record.frozenMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.frozenWithdrawals != null" >
+        frozen_withdrawals = #{record.frozenWithdrawals,jdbcType=DECIMAL},
+      </if>
+      <if test="record.underlingNumber != null" >
+        underling_number = #{record.underlingNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.whitePoints != null" >
+        white_points = #{record.whitePoints,jdbcType=INTEGER},
+      </if>
+      <if test="record.redPoints != null" >
+        red_points = #{record.redPoints,jdbcType=INTEGER},
+      </if>
+      <if test="record.addressId != null" >
+        address_id = #{record.addressId,jdbcType=INTEGER},
+      </if>
+      <if test="record.oldPhone != null" >
+        old_phone = #{record.oldPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobileValidated != null" >
+        mobile_validated = #{record.mobileValidated,jdbcType=TINYINT},
+      </if>
+      <if test="record.oauthType != null" >
+        oauth_type = #{record.oauthType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wxpOpenid != null" >
+        wxp_openid = #{record.wxpOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appOpenid != null" >
+        app_openid = #{record.appOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcOpenid != null" >
+        pc_openid = #{record.pcOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.token != null" >
+        token = #{record.token,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unionid != null" >
+        unionid = #{record.unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weixin != null" >
+        weixin = #{record.weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headPic != null" >
+        head_pic = #{record.headPic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emailValidated != null" >
+        email_validated = #{record.emailValidated,jdbcType=BIT},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickname != null" >
+        nickname = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=TINYINT},
+      </if>
+      <if test="record.totalAmount != null" >
+        total_amount = #{record.totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.blackname != null" >
+        blackname = #{record.blackname,jdbcType=BIT},
+      </if>
+      <if test="record.firstLeader != null" >
+        first_leader = #{record.firstLeader,jdbcType=CHAR},
+      </if>
+      <if test="record.secondLeader != null" >
+        second_leader = #{record.secondLeader,jdbcType=CHAR},
+      </if>
+      <if test="record.thirdLeader != null" >
+        third_leader = #{record.thirdLeader,jdbcType=CHAR},
+      </if>
+      <if test="record.regTime != null" >
+        reg_time = #{record.regTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastIp != null" >
+        last_ip = #{record.lastIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastLogin != null" >
+        last_login = #{record.lastLogin,jdbcType=INTEGER},
+      </if>
+      <if test="record.timeOut != null" >
+        time_out = #{record.timeOut,jdbcType=INTEGER},
+      </if>
+      <if test="record.joinPlaces != null" >
+        join_places = #{record.joinPlaces,jdbcType=INTEGER},
+      </if>
+      <if test="record.historyCountPlaces != null" >
+        history_count_places = #{record.historyCountPlaces,jdbcType=INTEGER},
+      </if>
+      <if test="record.historyLeftPlaces != null" >
+        history_left_places = #{record.historyLeftPlaces,jdbcType=INTEGER},
+      </if>
+      <if test="record.rewardCountPlaces != null" >
+        reward_count_places = #{record.rewardCountPlaces,jdbcType=INTEGER},
+      </if>
+      <if test="record.rewardLeftPlaces != null" >
+        reward_left_places = #{record.rewardLeftPlaces,jdbcType=INTEGER},
+      </if>
+      <if test="record.strtopass != null" >
+        strtopass = #{record.strtopass,jdbcType=CHAR},
+      </if>
+      <if test="record.province != null" >
+        province = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null" >
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detailed != null" >
+        detailed = #{record.detailed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tag != null" >
+        tag = #{record.tag,jdbcType=INTEGER},
+      </if>
+      <if test="record.recBussines != null" >
+        rec_bussines = #{record.recBussines,jdbcType=CHAR},
+      </if>
+      <if test="record.recUserid != null" >
+        rec_userid = #{record.recUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recVip != null" >
+        rec_vip = #{record.recVip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.places != null" >
+        places = #{record.places,jdbcType=INTEGER},
+      </if>
+      <if test="record.holder != null" >
+        holder = #{record.holder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankNumbre != null" >
+        bank_numbre = #{record.bankNumbre,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankCard != null" >
+        bank_card = #{record.bankCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankCardAddress != null" >
+        bank_card_address = #{record.bankCardAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isFree != null" >
+        is_free = #{record.isFree,jdbcType=BIT},
+      </if>
+      <if test="record.oauth != null" >
+        oauth = #{record.oauth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wxToken != null" >
+        wx_token = #{record.wxToken,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accessToken != null" >
+        access_token = #{record.accessToken,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wxEwm != null" >
+        wx_ewm = #{record.wxEwm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wxEwmTime != null" >
+        wx_ewm_time = #{record.wxEwmTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.hoder != null" >
+        hoder = #{record.hoder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankimg != null" >
+        bankimg = #{record.bankimg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subbranches != null" >
+        subbranches = #{record.subbranches,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankName != null" >
+        bank_name = #{record.bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankNumber != null" >
+        bank_number = #{record.bankNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.card != null" >
+        card = #{record.card,jdbcType=CHAR},
+      </if>
+      <if test="record.isHeadquarters != null" >
+        is_headquarters = #{record.isHeadquarters,jdbcType=BIT},
+      </if>
+      <if test="record.isRecuid != null" >
+        is_recuid = #{record.isRecuid,jdbcType=BIT},
+      </if>
+      <if test="record.recNoble != null" >
+        rec_noble = #{record.recNoble,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update misi_users
+    set user_id = #{record.userId,jdbcType=VARCHAR},
+      old_userid = #{record.oldUserid,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      paypwd = #{record.paypwd,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=BIT},
+      birthday = #{record.birthday,jdbcType=CHAR},
+      user_money = #{record.userMoney,jdbcType=DECIMAL},
+      frozen_money = #{record.frozenMoney,jdbcType=DECIMAL},
+      frozen_withdrawals = #{record.frozenWithdrawals,jdbcType=DECIMAL},
+      underling_number = #{record.underlingNumber,jdbcType=INTEGER},
+      white_points = #{record.whitePoints,jdbcType=INTEGER},
+      red_points = #{record.redPoints,jdbcType=INTEGER},
+      address_id = #{record.addressId,jdbcType=INTEGER},
+      old_phone = #{record.oldPhone,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      mobile_validated = #{record.mobileValidated,jdbcType=TINYINT},
+      oauth_type = #{record.oauthType,jdbcType=VARCHAR},
+      wxp_openid = #{record.wxpOpenid,jdbcType=VARCHAR},
+      app_openid = #{record.appOpenid,jdbcType=VARCHAR},
+      pc_openid = #{record.pcOpenid,jdbcType=VARCHAR},
+      token = #{record.token,jdbcType=VARCHAR},
+      unionid = #{record.unionid,jdbcType=VARCHAR},
+      weixin = #{record.weixin,jdbcType=VARCHAR},
+      head_pic = #{record.headPic,jdbcType=VARCHAR},
+      email_validated = #{record.emailValidated,jdbcType=BIT},
+      username = #{record.username,jdbcType=VARCHAR},
+      nickname = #{record.nickname,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=TINYINT},
+      total_amount = #{record.totalAmount,jdbcType=DECIMAL},
+      blackname = #{record.blackname,jdbcType=BIT},
+      first_leader = #{record.firstLeader,jdbcType=CHAR},
+      second_leader = #{record.secondLeader,jdbcType=CHAR},
+      third_leader = #{record.thirdLeader,jdbcType=CHAR},
+      reg_time = #{record.regTime,jdbcType=INTEGER},
+      last_ip = #{record.lastIp,jdbcType=VARCHAR},
+      last_login = #{record.lastLogin,jdbcType=INTEGER},
+      time_out = #{record.timeOut,jdbcType=INTEGER},
+      join_places = #{record.joinPlaces,jdbcType=INTEGER},
+      history_count_places = #{record.historyCountPlaces,jdbcType=INTEGER},
+      history_left_places = #{record.historyLeftPlaces,jdbcType=INTEGER},
+      reward_count_places = #{record.rewardCountPlaces,jdbcType=INTEGER},
+      reward_left_places = #{record.rewardLeftPlaces,jdbcType=INTEGER},
+      strtopass = #{record.strtopass,jdbcType=CHAR},
+      province = #{record.province,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      detailed = #{record.detailed,jdbcType=VARCHAR},
+      tag = #{record.tag,jdbcType=INTEGER},
+      rec_bussines = #{record.recBussines,jdbcType=CHAR},
+      rec_userid = #{record.recUserid,jdbcType=VARCHAR},
+      rec_vip = #{record.recVip,jdbcType=VARCHAR},
+      places = #{record.places,jdbcType=INTEGER},
+      holder = #{record.holder,jdbcType=VARCHAR},
+      bank_numbre = #{record.bankNumbre,jdbcType=VARCHAR},
+      bank_card = #{record.bankCard,jdbcType=VARCHAR},
+      bank_card_address = #{record.bankCardAddress,jdbcType=VARCHAR},
+      is_free = #{record.isFree,jdbcType=BIT},
+      oauth = #{record.oauth,jdbcType=VARCHAR},
+      wx_token = #{record.wxToken,jdbcType=VARCHAR},
+      access_token = #{record.accessToken,jdbcType=VARCHAR},
+      wx_ewm = #{record.wxEwm,jdbcType=VARCHAR},
+      wx_ewm_time = #{record.wxEwmTime,jdbcType=INTEGER},
+      hoder = #{record.hoder,jdbcType=VARCHAR},
+      bankimg = #{record.bankimg,jdbcType=VARCHAR},
+      subbranches = #{record.subbranches,jdbcType=VARCHAR},
+      bank_name = #{record.bankName,jdbcType=VARCHAR},
+      bank_number = #{record.bankNumber,jdbcType=VARCHAR},
+      card = #{record.card,jdbcType=CHAR},
+      is_headquarters = #{record.isHeadquarters,jdbcType=BIT},
+      is_recuid = #{record.isRecuid,jdbcType=BIT},
+      rec_noble = #{record.recNoble,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.msosm.shop.pojo.MisiUsers" >
+    update misi_users
+    <set >
+      <if test="oldUserid != null" >
+        old_userid = #{oldUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="paypwd != null" >
+        paypwd = #{paypwd,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=BIT},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=CHAR},
+      </if>
+      <if test="userMoney != null" >
+        user_money = #{userMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="frozenMoney != null" >
+        frozen_money = #{frozenMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="frozenWithdrawals != null" >
+        frozen_withdrawals = #{frozenWithdrawals,jdbcType=DECIMAL},
+      </if>
+      <if test="underlingNumber != null" >
+        underling_number = #{underlingNumber,jdbcType=INTEGER},
+      </if>
+      <if test="whitePoints != null" >
+        white_points = #{whitePoints,jdbcType=INTEGER},
+      </if>
+      <if test="redPoints != null" >
+        red_points = #{redPoints,jdbcType=INTEGER},
+      </if>
+      <if test="addressId != null" >
+        address_id = #{addressId,jdbcType=INTEGER},
+      </if>
+      <if test="oldPhone != null" >
+        old_phone = #{oldPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileValidated != null" >
+        mobile_validated = #{mobileValidated,jdbcType=TINYINT},
+      </if>
+      <if test="oauthType != null" >
+        oauth_type = #{oauthType,jdbcType=VARCHAR},
+      </if>
+      <if test="wxpOpenid != null" >
+        wxp_openid = #{wxpOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="appOpenid != null" >
+        app_openid = #{appOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="pcOpenid != null" >
+        pc_openid = #{pcOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="unionid != null" >
+        unionid = #{unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="weixin != null" >
+        weixin = #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="headPic != null" >
+        head_pic = #{headPic,jdbcType=VARCHAR},
+      </if>
+      <if test="emailValidated != null" >
+        email_validated = #{emailValidated,jdbcType=BIT},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=TINYINT},
+      </if>
+      <if test="totalAmount != null" >
+        total_amount = #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="blackname != null" >
+        blackname = #{blackname,jdbcType=BIT},
+      </if>
+      <if test="firstLeader != null" >
+        first_leader = #{firstLeader,jdbcType=CHAR},
+      </if>
+      <if test="secondLeader != null" >
+        second_leader = #{secondLeader,jdbcType=CHAR},
+      </if>
+      <if test="thirdLeader != null" >
+        third_leader = #{thirdLeader,jdbcType=CHAR},
+      </if>
+      <if test="regTime != null" >
+        reg_time = #{regTime,jdbcType=INTEGER},
+      </if>
+      <if test="lastIp != null" >
+        last_ip = #{lastIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLogin != null" >
+        last_login = #{lastLogin,jdbcType=INTEGER},
+      </if>
+      <if test="timeOut != null" >
+        time_out = #{timeOut,jdbcType=INTEGER},
+      </if>
+      <if test="joinPlaces != null" >
+        join_places = #{joinPlaces,jdbcType=INTEGER},
+      </if>
+      <if test="historyCountPlaces != null" >
+        history_count_places = #{historyCountPlaces,jdbcType=INTEGER},
+      </if>
+      <if test="historyLeftPlaces != null" >
+        history_left_places = #{historyLeftPlaces,jdbcType=INTEGER},
+      </if>
+      <if test="rewardCountPlaces != null" >
+        reward_count_places = #{rewardCountPlaces,jdbcType=INTEGER},
+      </if>
+      <if test="rewardLeftPlaces != null" >
+        reward_left_places = #{rewardLeftPlaces,jdbcType=INTEGER},
+      </if>
+      <if test="strtopass != null" >
+        strtopass = #{strtopass,jdbcType=CHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="detailed != null" >
+        detailed = #{detailed,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null" >
+        tag = #{tag,jdbcType=INTEGER},
+      </if>
+      <if test="recBussines != null" >
+        rec_bussines = #{recBussines,jdbcType=CHAR},
+      </if>
+      <if test="recUserid != null" >
+        rec_userid = #{recUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="recVip != null" >
+        rec_vip = #{recVip,jdbcType=VARCHAR},
+      </if>
+      <if test="places != null" >
+        places = #{places,jdbcType=INTEGER},
+      </if>
+      <if test="holder != null" >
+        holder = #{holder,jdbcType=VARCHAR},
+      </if>
+      <if test="bankNumbre != null" >
+        bank_numbre = #{bankNumbre,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCard != null" >
+        bank_card = #{bankCard,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCardAddress != null" >
+        bank_card_address = #{bankCardAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="isFree != null" >
+        is_free = #{isFree,jdbcType=BIT},
+      </if>
+      <if test="oauth != null" >
+        oauth = #{oauth,jdbcType=VARCHAR},
+      </if>
+      <if test="wxToken != null" >
+        wx_token = #{wxToken,jdbcType=VARCHAR},
+      </if>
+      <if test="accessToken != null" >
+        access_token = #{accessToken,jdbcType=VARCHAR},
+      </if>
+      <if test="wxEwm != null" >
+        wx_ewm = #{wxEwm,jdbcType=VARCHAR},
+      </if>
+      <if test="wxEwmTime != null" >
+        wx_ewm_time = #{wxEwmTime,jdbcType=INTEGER},
+      </if>
+      <if test="hoder != null" >
+        hoder = #{hoder,jdbcType=VARCHAR},
+      </if>
+      <if test="bankimg != null" >
+        bankimg = #{bankimg,jdbcType=VARCHAR},
+      </if>
+      <if test="subbranches != null" >
+        subbranches = #{subbranches,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null" >
+        bank_name = #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankNumber != null" >
+        bank_number = #{bankNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="card != null" >
+        card = #{card,jdbcType=CHAR},
+      </if>
+      <if test="isHeadquarters != null" >
+        is_headquarters = #{isHeadquarters,jdbcType=BIT},
+      </if>
+      <if test="isRecuid != null" >
+        is_recuid = #{isRecuid,jdbcType=BIT},
+      </if>
+      <if test="recNoble != null" >
+        rec_noble = #{recNoble,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.msosm.shop.pojo.MisiUsers" >
+    update misi_users
+    set old_userid = #{oldUserid,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      paypwd = #{paypwd,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=BIT},
+      birthday = #{birthday,jdbcType=CHAR},
+      user_money = #{userMoney,jdbcType=DECIMAL},
+      frozen_money = #{frozenMoney,jdbcType=DECIMAL},
+      frozen_withdrawals = #{frozenWithdrawals,jdbcType=DECIMAL},
+      underling_number = #{underlingNumber,jdbcType=INTEGER},
+      white_points = #{whitePoints,jdbcType=INTEGER},
+      red_points = #{redPoints,jdbcType=INTEGER},
+      address_id = #{addressId,jdbcType=INTEGER},
+      old_phone = #{oldPhone,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      mobile_validated = #{mobileValidated,jdbcType=TINYINT},
+      oauth_type = #{oauthType,jdbcType=VARCHAR},
+      wxp_openid = #{wxpOpenid,jdbcType=VARCHAR},
+      app_openid = #{appOpenid,jdbcType=VARCHAR},
+      pc_openid = #{pcOpenid,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR},
+      unionid = #{unionid,jdbcType=VARCHAR},
+      weixin = #{weixin,jdbcType=VARCHAR},
+      head_pic = #{headPic,jdbcType=VARCHAR},
+      email_validated = #{emailValidated,jdbcType=BIT},
+      username = #{username,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      level = #{level,jdbcType=TINYINT},
+      total_amount = #{totalAmount,jdbcType=DECIMAL},
+      blackname = #{blackname,jdbcType=BIT},
+      first_leader = #{firstLeader,jdbcType=CHAR},
+      second_leader = #{secondLeader,jdbcType=CHAR},
+      third_leader = #{thirdLeader,jdbcType=CHAR},
+      reg_time = #{regTime,jdbcType=INTEGER},
+      last_ip = #{lastIp,jdbcType=VARCHAR},
+      last_login = #{lastLogin,jdbcType=INTEGER},
+      time_out = #{timeOut,jdbcType=INTEGER},
+      join_places = #{joinPlaces,jdbcType=INTEGER},
+      history_count_places = #{historyCountPlaces,jdbcType=INTEGER},
+      history_left_places = #{historyLeftPlaces,jdbcType=INTEGER},
+      reward_count_places = #{rewardCountPlaces,jdbcType=INTEGER},
+      reward_left_places = #{rewardLeftPlaces,jdbcType=INTEGER},
+      strtopass = #{strtopass,jdbcType=CHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      detailed = #{detailed,jdbcType=VARCHAR},
+      tag = #{tag,jdbcType=INTEGER},
+      rec_bussines = #{recBussines,jdbcType=CHAR},
+      rec_userid = #{recUserid,jdbcType=VARCHAR},
+      rec_vip = #{recVip,jdbcType=VARCHAR},
+      places = #{places,jdbcType=INTEGER},
+      holder = #{holder,jdbcType=VARCHAR},
+      bank_numbre = #{bankNumbre,jdbcType=VARCHAR},
+      bank_card = #{bankCard,jdbcType=VARCHAR},
+      bank_card_address = #{bankCardAddress,jdbcType=VARCHAR},
+      is_free = #{isFree,jdbcType=BIT},
+      oauth = #{oauth,jdbcType=VARCHAR},
+      wx_token = #{wxToken,jdbcType=VARCHAR},
+      access_token = #{accessToken,jdbcType=VARCHAR},
+      wx_ewm = #{wxEwm,jdbcType=VARCHAR},
+      wx_ewm_time = #{wxEwmTime,jdbcType=INTEGER},
+      hoder = #{hoder,jdbcType=VARCHAR},
+      bankimg = #{bankimg,jdbcType=VARCHAR},
+      subbranches = #{subbranches,jdbcType=VARCHAR},
+      bank_name = #{bankName,jdbcType=VARCHAR},
+      bank_number = #{bankNumber,jdbcType=VARCHAR},
+      card = #{card,jdbcType=CHAR},
+      is_headquarters = #{isHeadquarters,jdbcType=BIT},
+      is_recuid = #{isRecuid,jdbcType=BIT},
+      rec_noble = #{recNoble,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+</mapper>

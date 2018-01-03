@@ -1,0 +1,11 @@
+cn\msosm\shop\jedis\JedisClient.class
+cn\msosm\shop\service\UserServiceImpl.class
+cn\msosm\shop\mapper\MisiUsersMapper.class
+cn\msosm\shop\pojo\MisiUsersExample$GeneratedCriteria.class
+cn\msosm\shop\service\UserService.class
+cn\msosm\shop\pojo\MisiUsers.class
+cn\msosm\shop\pojo\MisiUsersExample$Criteria.class
+cn\msosm\shop\pojo\MisiUsersExample.class
+cn\msosm\shop\jedis\JedisClientPool.class
+cn\msosm\shop\controller\UserController.class
+cn\msosm\shop\pojo\MisiUsersExample$Criterion.class
